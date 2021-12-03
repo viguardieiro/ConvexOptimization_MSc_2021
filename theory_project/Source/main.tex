@@ -19,6 +19,7 @@
 \usepackage[numbib]{tocbibind}
 
 \usepackage{url}
+\usepackage{hyperref}
 
 \newcommand{\X}{\mathcal{X}}
 \newcommand{\R}{\mathbb{R}}
@@ -35,6 +36,8 @@
 
 \begin{document}
 \maketitle
+
+\tableofcontents
 
 \section{Motivation}
 
@@ -285,7 +288,7 @@ From Proposition \ref{prop:dual} we can derive a connection between the primal a
     For $t>0$, the primal and the dual central paths $X_*(t), S_*(t)$ of a (strictly feasible) primal-dual pair (P), (D) are linked by the relations
     \begin{align*}
         S_*(t) &= -t^{-1}\nabla K(X_*(t)),\\
-        X_*(t) &= -t^{-1}\nabla K(S_*(t).
+        X_*(t) &= -t^{-1}\nabla K(S_*(t)).
     \end{align*}
 \end{theorem}
 
@@ -382,7 +385,7 @@ with certain $\kappa \leq 1$.
 
 \subsection{Path-following scheme}
 
-Assume we are solving a strictly feasible primal-dual pair of problems (P), (D) and intend to trace the associated central path. For this purpose, we just need a mechanism for updating a current iterate $(\Bar{t}, \Bar{X}, \Bar{S})$ such that $\Bar{t}<0$, $\Bar{X}$ is strictly primal feasible, $\Bar{S}$ is strictly dual feasible, and $(\Bar{X}, \Bar{S})$ is a good approximation of the point $Z_*(\Bar{t}) = (X_*(\Bar{t}), S_*(\Bar{t}))$ on the central path, into a new iterate $(t_+, X_+, S_+)$ with similar properties and a larger value $t_+ > \Bar{t}$ of the penalty parameter. Given such an updating mechanism and iterating it, we indeed shal trace the central path.
+Assume we are solving a strictly feasible primal-dual pair of problems (P), (D) and intend to trace the associated central path. For this purpose, we just need a mechanism for updating a current iterate $(\Bar{t}, \Bar{X}, \Bar{S})$ such that $\Bar{t}>0$, $\Bar{X}$ is strictly primal feasible, $\Bar{S}$ is strictly dual feasible, and $(\Bar{X}, \Bar{S})$ is a good approximation of the point $Z_*(\Bar{t}) = (X_*(\Bar{t}), S_*(\Bar{t}))$ on the central path, into a new iterate $(t_+, X_+, S_+)$ with similar properties and a larger value $t_+ > \Bar{t}$ of the penalty parameter. Given such an updating mechanism and iterating it, we indeed shal trace the central path.
 
 How could we construct the required updating? Recalling the description of the central path, we rephrase our question as:
 
@@ -402,7 +405,7 @@ update it into a new triple $(t_+, X_+, S_+)$ with the same properties and such 
 
 The most natural way, from the viewpoint of computational mathematics, to achieve our target is as follows:
 \begin{enumerate}
-    \item Choose somehow a desired new value $T_+ > \Bar{t}$ of the penalty parameter.
+    \item Choose somehow a desired new value $t_+ > \Bar{t}$ of the penalty parameter.
     \item Linearize the left-hand-side $G_{t_+}(X,S)$ of the system of nonlinear equations at the point $(\Bar{X}, \Bar{S})$, and replace (\ref{eq:5}) with the linearized system of equations
     \begin{equation}\label{eq:6}
         G_{t_+}(\Bar{X},\Bar{S})+\frac{\partial G_{t_+}(\Bar{X},\Bar{S})}{\partial X}(X-\Bar{X})+\frac{\partial G_{t_+}(\Bar{X}, \Bar{S}}{\partial S}(S-\Bar{S}) = 0.
